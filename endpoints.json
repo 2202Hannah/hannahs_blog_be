@@ -1,0 +1,126 @@
+{
+  "GET /api": {
+    "description": "serves up a json representation of all the available endpoints of the api"
+  },
+  "GET /api/topics": {
+    "description": "serves an array of all topics",
+    "queries": [],
+    "exampleResponse": {
+      "topics": [{ "slug": "football", "description": "Footie!" }]
+    }
+  },
+  "GET /api/articles": {
+    "description": "serves an array of all articles",
+    "queries": ["topic", "sort_by", "order", "limit", "page (p)"],
+    "exampleResponse": {
+      "articles": [
+        {
+          "title": "Seafood substitutions are increasing",
+          "topic": "cooking",
+          "body": "Text from the article..",
+          "created_at": 1527695953341
+        }
+      ]
+    }
+  },
+  "GET /api/articles/:article_id": {
+    "description": "serves an object of information about a specific article",
+    "queries": [],
+    "exampleResponse": {
+      "article_id": 1,
+      "title": "Living in the shadow of a great man",
+      "topic": "mitch",
+      "body": "I find this existence challenging",
+      "created_at": "2020-07-09T20:11:00.000Z",
+      "votes": 100,
+      "comment_count": 11
+    }
+  },
+  "GET /api/users": {
+    "description": "serves an array of all users",
+    "queries": [],
+    "exampleResponse": { 
+      "users": [
+      {
+        "username": "butter_bridge",
+        "name": "jonny",
+        "avatar_url": "https://www.healthytherapies.com/wp-content/uploads/2016/06/Lime3.jpg"
+      }
+    ]
+  }
+},
+  "GET /api/users/:username": {
+    "description": "serves an object of information about a specific user",
+    "queries": [],
+    "exampleResponse": 
+      {
+        "username": "butter_bridge",
+        "name": "jonny",
+        "avatar_url": "https://www.healthytherapies.com/wp-content/uploads/2016/06/Lime3.jpg"
+      }
+  },
+  "GET /api/articles/:article_id/comments": {
+    "description": "serves an array of all comments for a specified article",
+    "queries": [],
+    "exampleResponse": [
+      {
+        "comment_id": 9,
+        "votes": 0,
+        "created_at": "2020-01-01T03:08:00.000Z",
+        "author": "icellusedkars",
+        "body": "Superficially charming"
+      }
+    ]
+  },
+  "GET /api/articles/:username": {
+    "description": "serves an object of information about a specific user",
+    "queries": [],
+    "exampleResponse": {
+      "username": "icellusedkars",
+      "name": "sam",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/24604688?s=460&v=4"
+    }
+  },
+  "PATCH /api/articles/:article_id": {
+    "description": "updates the specified article's number of votes and serves the updated article object",
+    "queries": [],
+    "exampleInput": { "inc_votes": 100 },
+    "exampleResponse": {
+      "article_id": 1,
+      "title": "Living in the shadow of a great man",
+      "topic": "mitch",
+      "body": "I find this existence challenging",
+      "created_at": "2020-07-09T20:11:00.000Z",
+      "votes": 100
+    }
+  },
+  "PATCH /api/comments/:comment_id": {
+    "description": "updates the specified comment's number of votes and serves the updated comment object",
+    "queries": [],
+    "exampleInput": { "inc_votes": 10 },
+    "exampleResponse": {
+      "comment_id": 1,
+      "body": "Oh, I've got compassion running out of my nose, pal! I'm the Sultan of Sentiment!",
+      "votes": 26,
+      "author": "butter_bridge",
+      "article_id": 9,
+      "created_at": "2020-04-06T12:17:00.000Z"
+    }
+  },
+  "POST /api/articles/:article_id/comments": {
+    "description": "inserts a new comment to the database and serves the new comment object",
+    "queries": [],
+    "exampleInput": { "username": "icellusedkars", "body": "this is great!" },
+    "exampleResponse": {
+      "comment_id": 19,
+      "body": "this is great!",
+      "article_id": 1,
+      "author": "icellusedkars",
+      "votes": 0,
+      "created_at": "2022-10-13T15:15:02.213Z"
+    }
+  },
+  "DELETE /api/comments/comment_id": {
+    "description": "Deletes a specific comment from the database"
+  }
+}
